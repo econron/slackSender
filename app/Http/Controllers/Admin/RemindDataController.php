@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Reminds;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,11 @@ class RemindDataController extends Controller
 {
     public function show_reminds(){
         $reminds = DB::table('reminds')->get();
-        return view('reminds', ['reminds' => $reminds]);
+
+        $a = new DateTime('now');
+        $today = $a->format('Y-m-d H:i:s');
+
+        return view('reminds', ['reminds' => $reminds, 'today' => $today]);
     }
 
     public function back_to_add_page(Request $request){
