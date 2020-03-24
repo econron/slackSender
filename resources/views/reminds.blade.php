@@ -10,7 +10,7 @@
             <th></th>
         </tr>
         @foreach($reminds as $remind)
-            <tr>
+            <tr style="{{ $remind->deadline < $today ? print "color: #FF0000;" : " " }}">
                 <td><div>{{ $remind->channel_name }}</div></td>
                 <td><div>{{ $remind->remind_content }}</div></td>
                 <td><div>{{ $remind->webhook_address }}</div></td>
@@ -21,4 +21,7 @@
         @endforeach
     </table>
     <button><a href="{{ route('adds') }}">通知を追加する</a></button>
+    <style>
+
+    </style>
 @endsection
