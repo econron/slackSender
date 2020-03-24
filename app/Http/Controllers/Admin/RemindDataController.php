@@ -46,22 +46,32 @@ class RemindDataController extends Controller
     }
 
     public function show_edit_reminds($id){
+
         $edit_remind
             = DB::table('reminds')
             ->where('reminds.id', '=', $id)
             ->get()
             ->first();
 
-        return view('edit', ['remind' => $edit_remind]);
+        return view('edit', ['remind' => $edit_remind, 'id' => $id]);
     }
 
     public function edit_confirm_reminds(Request $request, $id){
+
         $edit_remind = $request->all();
-        return view('editconfirm', ['remind' => $edit_remind]);
+
+        return view('editconfirm', ['remind' => $edit_remind, 'id'=> $id]);
     }
 
     public function edit_complete(Request $request, $id){
-        DB::table('reminds')->where('reminds.id', '=', $id)->update();
+        $updated_remind = $request->all();
+        DB::table('reminds')->where('reminds.id', '=', $id)
+            ->update(
+                ['channel_name' => $updated_remind['channel_name'],
+                 'webhook_address'=> $updated_remind['webhook_address'],
+                 'remind_content' => $updated_remind['remind_content'],
+                 'deadline' => $updated_remind['deadline']]
+            );
         return view('editcomplete');
     }
 }
