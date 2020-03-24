@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form method="post" action="{{ route('add.confirm') }}">
+    <form method="post" action="{{ route('edit.confirm',['id' => $id]) }}">
         @csrf
         <table>
             <tr>
@@ -20,7 +20,7 @@
                 <td><input type="datetime-local" name="deadline" value="{{ $remind->deadline }}"></td>
             </tr>
         </table>
-        <input type="submit" value="通知する内容を変更する">
-        <button formaction="{{ route('reminds') }}">更新しない</button>
+        <input type="submit" value="通知する内容を確認する">
     </form>
+    <button><a href="{{ route('reminds') }}">更新しない</a></button>
 @endsection

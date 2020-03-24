@@ -32,8 +32,8 @@ Route::group(['prefix' => 'admin', 'name' => 'Admin'], function (){
 
     Route::group(['prefix' => 'edit'], function (){
        Route::get('/detail/{id}', 'Admin\RemindDataController@show_edit_reminds')->name('edit');
-       Route::post('/{id}/confirm', 'Admin\RemindDataController@edit_confirm_reminds')->name('edit.confirm');
-       Route::post('{id}/complete', 'Admin\RemindDataController@edit_complete')->name('edit.complete');
+       Route::post('/confirm/{id}', 'Admin\RemindDataController@edit_confirm_reminds')->name('edit.confirm');
+       Route::post('/complete/{id}', 'Admin\RemindDataController@edit_complete')->name('edit.complete');
     });
     Route::get('/delete/{id}','Admin\RemindDataController@delete_reminds')->name('delete');
 }
