@@ -21,7 +21,7 @@ class SendRemindsController extends Controller
 
             // メッセージ
             $message = array(
-                "username"   => "UPCROSS締め切りの神様",
+                "username"   => "締め切りの神様",
                 "icon_emoji" => ":slack:",
                 "attachments" => array(
                     array(
@@ -69,8 +69,8 @@ class SendRemindsController extends Controller
         //csvファイルから1行読み出すごとに
         //①国民の休日に１ついれる
         //②配列番号を増やす
-        foreach ($national_holidays_csv as $national_holiday){
-            $national_holidays[$number_in_national_holidays] = $national_holiday[0];
+        foreach ($national_holidays_csv as $national_holiday_csv){
+            $national_holidays[$number_in_national_holidays] = $national_holiday_csv[0];
             $number_in_national_holidays++;
         }
 

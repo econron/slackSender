@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+    <h1>締め切りの神様</h1>
+    <h3>締め切り日をすぎた通知は赤文字で表示されます。</h3>
     <table border="1">
         <tr>
             <th>チャンネル名</th>
@@ -21,7 +23,4 @@
         @endforeach
     </table>
     <button><a href="{{ route('adds') }}">通知を追加する</a></button>
-    <style>
-
-    </style>
 @endsection
