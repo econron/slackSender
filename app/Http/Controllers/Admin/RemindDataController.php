@@ -7,6 +7,7 @@ use App\Reminds;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\SlackRequest;
 
 class RemindDataController extends Controller
 {
@@ -24,7 +25,7 @@ class RemindDataController extends Controller
         return view('adds', ['remind' => $remind]);
     }
 
-    public function add_confirm(Request $request){
+    public function add_confirm(SlackRequest $request){
         $remind = $request->all();
         return view('confirm', ['remind' => $remind]);
     }
@@ -46,7 +47,7 @@ class RemindDataController extends Controller
 
     public function delete_reminds($id){
         DB::table('reminds')->where('reminds.id','=', $id)->delete();
-       $reminds = DB::table('reminds')->get();
+        $reminds = DB::table('reminds')->get();
         return view('reminds', ['reminds' => $reminds]);
     }
 
@@ -61,7 +62,7 @@ class RemindDataController extends Controller
         return view('edit', ['remind' => $edit_remind, 'id' => $id]);
     }
 
-    public function edit_confirm_reminds(Request $request, $id){
+    public function edit_confirm_reminds(SlackRequest $request, $id){
 
         $edit_remind = $request->all();
 
