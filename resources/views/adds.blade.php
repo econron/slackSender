@@ -13,7 +13,7 @@
                 <td><input type="text" name="webhook_address" value="{{ isset($remind['webhook_address']) ? $remind['webhook_address'] : "" }}"></td>
             </tr>
             <tr>
-                <th>リマインド内容</th>
+                <th>タスク名</th>
                 <td><textarea row="8" name="remind_content" value="{{ isset($remind['remind_content']) ? $remind['remind_content'] : "" }}"></textarea></td>
             </tr>
             <tr>
