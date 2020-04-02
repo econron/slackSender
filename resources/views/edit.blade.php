@@ -23,4 +23,13 @@
         <input type="submit" value="通知する内容を確認する">
     </form>
     <button><a href="{{ route('reminds') }}">更新しない</a></button>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection
