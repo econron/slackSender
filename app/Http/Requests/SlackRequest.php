@@ -28,7 +28,6 @@ class SlackRequest extends FormRequest
             'channel_name' => 'bail|required|max:255',
             'remind_content' => 'required|max:255',
             'webhook_address' => 'required',
-            'deadline' => 'date_format:Y-m-d H:i:s'
         ];
     }
 
