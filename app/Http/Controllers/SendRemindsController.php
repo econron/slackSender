@@ -85,15 +85,15 @@ class SendRemindsController extends Controller
         //締め切り日数のカウント
         $rest_days = 0;
 
-        //上記２つの配列のうちどれかに入ってなければ平日に1カウントする
+        //上記２つの配列のうちどれかに入ってなければ締め切り日数に1カウントする
         for($i = 0; $i < $span; $i++){
-            $to += (60*60*24);
-            if(!in_array(date("D", $to), $holidays) &&
-                !in_array(date("Y/m/d", $to), $national_holidays)){
-                $rest_days++;
+            $to += (60 * 60 * 24);
+            if(!in_array(date("Y/n/j", $to), $national_holidays)){
+                if(!in_array(date("D", $to), $holidays)){
+                    $rest_days++;
+                }
             }
         }
-
         return $rest_days;
     }
 
