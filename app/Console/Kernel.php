@@ -178,7 +178,8 @@ class Kernel extends ConsoleKernel
         }
 
         $today = new DateTime('today');
-        $to = strtotime($today->modify('-1 day')->format('Y-m-d H:i:s'));
+
+        $to = strtotime($today->format('Y-m-d H:i:s'));
 
         if(!in_array(date("Y/n/j", $to), $national_holidays)){
             if(!in_array(date("D", $to), $holidays)){
