@@ -56,7 +56,9 @@ class Kernel extends ConsoleKernel
 
             }
 
-        })->weekdays()->at('10:00');
+        })->weekdays()->at('10:00')->when(
+            $this->today_is_eigyoubi()
+        );
     }
 
     /**
@@ -141,5 +143,50 @@ class Kernel extends ConsoleKernel
         curl_setopt($ch, CURLOPT_POSTFIELDS, $message_post);
         curl_exec($ch);
         curl_close($ch);
+    }
+
+    public function today_is_eigyoubi(){
+
+        setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+        //csvファイルを読み込む
+        $national_holidays_csv = new \SplFileObject(database_path('syukujitsu.csv'));
+
+        //ファイル読み込み時の各種設定
+        $national_holidays_csv->setFlags(
+            \SplFileObject::READ_CSV |
+            \SplFileObject::READ_AHEAD |
+            \SplFileObject::SKIP_EMPTY |
+            \SplFileObject::DROP_NEW_LINE
+        );
+
+        //土日の配列
+        $holidays = ['Sat','Sun'];
+
+        //国民の休日の配列
+        $national_holidays = [];
+
+        //国民の休日の配列番号
+        $number_in_national_holidays = 0;
+
+        //csvファイルから1行読み出すごとに
+        //①国民の休日に１ついれる
+        //②配列番号を増やす
+        foreach ($national_holidays_csv as $national_holiday){
+            $national_holidays[$number_in_national_holidays] = $national_holiday[0];
+            $number_in_national_holidays++;
+        }
+
+        $today = new DateTime('today');
+        $to = strtotime($today->modify('-1 day')->format('Y-m-d H:i:s'));
+
+        if(!in_array(date("Y/n/j", $to), $national_holidays)){
+            if(!in_array(date("D", $to), $holidays)){
+                return true;
+            }
+        }
+
+        return false;
+
     }
 }
